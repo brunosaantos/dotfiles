@@ -47,6 +47,7 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+set clipboard=unnamed,unnamedplus
 
 " ======= Vim Javascript ========
 let g:javascript_plugin_jsdoc = 1
