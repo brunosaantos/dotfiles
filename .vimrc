@@ -13,30 +13,34 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'ctrlpvim/ctrlp.vim' 
 Plugin 'flazz/vim-colorschemes'
 Plugin 'mileszs/ack.vim'
-Plugin 'neoclide/coc.nvim', 
 Plugin 'pangloss/vim-javascript'
 Plugin 'posva/vim-vue'
 Plugin 'prettier/vim-prettier'
 Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-commentary.git'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
 Plugin 'w0rp/ale'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+
+" Install Vim Plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+
+call plug#end()
+
+" ======= General Settings ========
 syntax on
+let mapleader=","
 set number
 set relativenumber
 set tabstop=2
@@ -44,20 +48,37 @@ set shiftwidth=2
 set expandtab
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
-" The silver search
+" ======= Vim Javascript ========
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+
+" ======= ctrlp ========
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+" ======= The silver search =======
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-" NERDTree
+" ======= NERDTree =======
 let NERDTreeShowHidden=1
 map <silent> <C-n> :NERDTreeFocus<CR>
 
-" Prettier
+" ======= Prettier =======
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
-" Colorscheme
+" ======= Colorscheme =======
 colorscheme gruvbox
 
-" Vim Vue
+" ======= Vim Vue =======
 autocmd FileType vue syntax sync fromstart
 map <C-k> :Commentary<CR>
+
+" ======= Shortcuts =======
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
