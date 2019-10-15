@@ -39,15 +39,36 @@ Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
 call plug#end()
 
 " ======= General Settings ========
-syntax on
 let mapleader=","
 set number
 set relativenumber
+set expandtab
+
+" Use system clipboard
+set clipboard=unnamed,unnamedplus
+
+" Do not create .swp files
+set noswapfile
+
+" Show auto complete menus.
+set wildmenu
+set wildmode=list:longest
+
+" Turn on syntax hightlighting.
+set syntax=on
+set nowrap
 set tabstop=2
 set shiftwidth=2
-set expandtab
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-set clipboard=unnamed,unnamedplus
+set nocindent
+
+" Speed Optimization
+set ttyfast
+set lazyredraw
+
+" ======= Theme ========
+set background=dark
+set termguicolors
+colorscheme quantum
 
 " ======= Vim Javascript ========
 let g:javascript_plugin_jsdoc = 1
@@ -55,6 +76,7 @@ let g:javascript_plugin_ngdoc = 1
 
 " ======= ctrlp ========
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_show_hidden = 1
 
 " ======= The silver search =======
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -66,9 +88,6 @@ map <silent> <C-n> :NERDTreeFocus<CR>
 " ======= Prettier =======
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
-
-" ======= Colorscheme =======
-colorscheme gruvbox
 
 " ======= Vim Vue =======
 autocmd FileType vue syntax sync fromstart
