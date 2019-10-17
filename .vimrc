@@ -13,6 +13,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'ctrlpvim/ctrlp.vim' 
 Plugin 'flazz/vim-colorschemes'
 Plugin 'mileszs/ack.vim'
+Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'posva/vim-vue'
 Plugin 'prettier/vim-prettier'
@@ -92,6 +93,11 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 " ======= Vim Vue =======
 autocmd FileType vue syntax sync fromstart
 map <C-k> :Commentary<CR>
+let g:vue_pre_processors = 'detect_on_enter'
+let g:vue_pre_processors = ['scss']
+
+" ======= Javascript Libraries Syntax =======
+let g:used_javascript_libs = 'underscore,react,vue'
 
 " ======= Shortcuts =======
 " Use <c-space> to trigger completion.
