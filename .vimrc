@@ -95,9 +95,6 @@ autocmd FileType vue syntax sync fromstart
 map <C-k> :Commentary<CR>
 let g:vue_pre_processors = 'detect_on_enter'
 
-" ======= Javascript Libraries Syntax =======
-let g:used_javascript_libs = 'underscore,react,vue'
-
 " ======= NERD Commenter =======
 let g:used_javascript_libs = 'underscore,react,vue'
 let g:ft = ''
