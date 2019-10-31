@@ -42,3 +42,6 @@ export LC_ALL=en_US.UTF-8
 # Set Spaceship ZSH as a prompt
 autoload -U promptinit; promptinit
 prompt spaceship
+
+# Load secrets
+source $HOME/.zshrc.secrets
