@@ -18,6 +18,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Alias
 alias vim="nvim"
+alias delete_git_branchs='git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d'
 
 # Functions
 
