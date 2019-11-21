@@ -12,6 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'ctrlpvim/ctrlp.vim' 
 Plugin 'flazz/vim-colorschemes'
+Plugin 'flrnprz/plastic.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'pangloss/vim-javascript'
@@ -44,6 +45,8 @@ let mapleader=","
 set number
 set relativenumber
 set expandtab
+set splitbelow
+set splitright
 
 " Use system clipboard
 set clipboard=unnamed,unnamedplus
@@ -69,11 +72,14 @@ set lazyredraw
 " ======= Theme ========
 set background=dark
 set termguicolors
-colorscheme quantum
+colorscheme plastic
 
 " ======= Vim Javascript ========
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_ngdoc = 1
+
+" Lightline
+let g:lightline = { 'colorscheme': 'plastic' }
 
 " ======= ctrlp ========
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
