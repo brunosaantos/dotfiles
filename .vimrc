@@ -92,6 +92,17 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 let NERDTreeShowHidden=1
 map <silent> <C-n> :NERDTreeFocus<CR>
 
+" ======= COC =======
+let g:coc_global_extensions = [
+\ 'coc-vetur',
+\ 'coc-json',
+\ 'coc-tsserver',
+\ 'coc-emmet',
+\ 'coc-snippets',
+\ 'coc-prettier',
+\ 'coc-eslint',
+\ ]
+
 " ======= Prettier =======
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
