@@ -12,7 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'ctrlpvim/ctrlp.vim' 
 Plugin 'flazz/vim-colorschemes'
-Plugin 'flrnprz/plastic.vim'
+Plugin 'dracula/vim', { 'name': 'dracula' }
 Plugin 'mileszs/ack.vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'pangloss/vim-javascript'
@@ -37,6 +37,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+Plug 'joshdick/onedark.vim'
 
 call plug#end()
 
@@ -72,14 +73,15 @@ set lazyredraw
 " ======= Theme ========
 set background=dark
 set termguicolors
-colorscheme plastic
+let g:onedark_termcolors=256
+colorscheme onedark
 
 " ======= Vim Javascript ========
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_ngdoc = 1
 
 " Lightline
-let g:lightline = { 'colorscheme': 'plastic' }
+let g:lightline = { 'colorscheme': 'onedark' }
 
 " ======= ctrlp ========
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
