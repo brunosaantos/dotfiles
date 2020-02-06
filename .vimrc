@@ -38,6 +38,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
 Plug 'joshdick/onedark.vim'
+Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
 
 call plug#end()
 
@@ -135,6 +136,14 @@ function! NERDCommenter_after()
     let g:ft = ''
   endif
 endfunction
+
+" ======= Import Cost =======
+augroup import_cost_auto_run
+  autocmd!
+  autocmd InsertLeave *.js,*.jsx,*.ts,*.tsx ImportCost
+  autocmd BufEnter *.js,*.jsx,*.ts,*.tsx ImportCost
+  autocmd CursorHold *.js,*.jsx,*.ts,*.tsx ImportCost
+augroup END
 
 " ======= Shortcuts =======
 " Use <c-space> to trigger completion.
