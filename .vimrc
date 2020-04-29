@@ -77,7 +77,7 @@ set lazyredraw
 set background=dark
 set termguicolors
 let g:onedark_termcolors=256
-colorscheme onedark
+colorscheme onedark 
 
 " ======= Vim Javascript ========
 let g:javascript_plugin_jsdoc = 1
@@ -156,3 +156,10 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+
+" Remap move between windows
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
+nnoremap <C-H> <C-W>h
