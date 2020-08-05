@@ -99,6 +99,7 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " ======= NERDTree =======
 let NERDTreeShowHidden=1
+let g:NERDTreeWinPos = "right"
 map <silent> <C-n> :NERDTreeFocus<CR>
 
 " ======= COC =======
