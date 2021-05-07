@@ -32,6 +32,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'dense-analysis/ale'
+Plug 'honza/vim-snippets'
 Plug 'joshdick/onedark.vim'
 Plug 'jparise/vim-graphql'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
