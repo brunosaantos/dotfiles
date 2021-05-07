@@ -1,4 +1,4 @@
-### Todos
+### To-dos
 - [ ] Install homebrew
 - [ ] Install neovim
 - [ ] Add the "vim to neovim" settings
@@ -8,26 +8,26 @@
 - [ ] Install the silver searcher
 - [ ] Install Spaceship Prompt
 
-*Install python provider*
+**Install python provider**
 ```sh
 python3 -m pip install --user --upgrade pynvim
 ```
 
-*Install fonts*
+**Install fonts**
 ```sh
 brew tap homebrew/cask-fonts
 brew install --cask font-hack-nerd-font
 ```
 
-*Install TPM*
+**Install TPM**
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-*Install the silver searcher*
+**Install the silver searcher**
 ```sh
 brew install the_silver_searcher
 ```
 
-*Install Spaceship Prompt*
+**Install Spaceship Prompt**
 ```sh
 yarn global add spaceship-prompt
 ```
