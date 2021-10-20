@@ -40,6 +40,7 @@ Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
 
@@ -64,7 +65,7 @@ set noswapfile
 set wildmenu
 set wildmode=list:longest
 
-" Turn on syntax hightlighting.
+" Turn on syntax highlighting.
 set syntax=on
 set nowrap
 set tabstop=2
@@ -105,14 +106,16 @@ map <silent> <C-n> :NERDTreeFocus<CR>
 
 " ======= COC =======
 let g:coc_global_extensions = [
-\ 'coc-vetur',
-\ 'coc-json',
-\ 'coc-tsserver',
 \ 'coc-emmet',
-\ 'coc-snippets',
-\ 'coc-prettier',
 \ 'coc-eslint',
+\ 'coc-json',
+\ 'coc-marketplace',
+\ 'coc-prettier',
+\ 'coc-simple-react-snippets',
+\ 'coc-snippets',
 \ 'coc-stylelint',
+\ 'coc-tsserver',
+\ 'coc-vetur',
 \ ]
 
 " ======= Prettier =======
@@ -123,8 +126,10 @@ autocmd FileType vue syntax sync fromstart
 map <C-k> :Commentary<CR>
 let g:vue_pre_processors = 'detect_on_enter'
 
-" ======= NERD Commenter =======
+" ======= Javascript Libraries Syntax =======
 let g:used_javascript_libs = 'underscore,react,vue'
+
+" ======= NERD Commenter =======
 let g:ft = ''
 function! NERDCommenter_before()
   if &ft == 'vue'
@@ -153,6 +158,9 @@ augroup import_cost_auto_run
   autocmd CursorHold *.js,*.jsx,*.ts,*.tsx ImportCost
 augroup END
 
+" ======= Vim Airline =======
+let g:airline#extensions#tabline#enabled = 1
+
 " ======= Shortcuts =======
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -172,3 +180,13 @@ nnoremap <C-H> <C-W>h
 " Remap shift highlighed lines
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Show documentation
+nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
+
