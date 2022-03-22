@@ -107,7 +107,7 @@ map <silent> <C-n> :NERDTreeFocus<CR>
 " ======= COC =======
 let g:coc_global_extensions = [
 \ 'coc-emmet',
-\ 'coc-eslint',
+\ 'coc-eslint8',
 \ 'coc-json',
 \ 'coc-marketplace',
 \ 'coc-prettier',
@@ -119,7 +119,7 @@ let g:coc_global_extensions = [
 \ ]
 
 " ======= Prettier =======
-"command! -nargs=0 Prettier :CocCommand prettier.formatFile
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " ======= Vim Vue =======
 autocmd FileType vue syntax sync fromstart
