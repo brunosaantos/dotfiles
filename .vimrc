@@ -78,10 +78,10 @@ set signcolumn=yes
 nnoremap <CR> :noh<CR><CR>
 
 " ======= Theme ========
-set background=dark
-set termguicolors
+"set background=dark
+"set termguicolors
 "let g:onedark_termcolors=256
-colorscheme badwolf 
+"colorscheme badwolf 
 
 " ======= Vim Javascript ========
 let g:javascript_plugin_jsdoc = 1
