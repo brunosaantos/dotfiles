@@ -1,25 +1,6 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'ctrlpvim/ctrlp.vim' 
-Plugin 'flazz/vim-colorschemes'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'mileszs/ack.vim'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'peitalin/vim-jsx-typescript'
-Plugin 'posva/vim-vue'
-
-call vundle#end()            " required
 filetype plugin indent on    " required
 
 " Install Vim Plug
@@ -31,18 +12,26 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'dense-analysis/ale'
-Plug 'honza/vim-snippets'
-Plug 'joshdick/onedark.vim'
-Plug 'jparise/vim-graphql'
+Plug 'ctrlpvim/ctrlp.vim' 
+"Plug 'dense-analysis/ale'
+Plug 'flazz/vim-colorschemes'
+"Plug 'honza/vim-snippets'
+"Plug 'joshdick/onedark.vim'
+"Plug 'jparise/vim-graphql'
+Plug 'leafgarland/typescript-vim'
+Plug 'mileszs/ack.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'peitalin/vim-jsx-typescript'
+"Plug 'posva/vim-vue'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
-Plug 'ryanoasis/vim-devicons'
+"Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
+"Plug 'tpope/vim-surround'
+"Plug 'vim-airline/vim-airline'
+"Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
 
 call plug#end()
 
@@ -54,6 +43,7 @@ set expandtab
 set splitbelow
 set splitright
 set cursorline
+set colorcolumn=80
 
 " Use system clipboard
 set clipboard=unnamed,unnamedplus
@@ -76,14 +66,22 @@ set nocindent
 set ttyfast
 set lazyredraw
 
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
+
 " This unsets the \"last search pattern\" register by hitting return
 nnoremap <CR> :noh<CR><CR>
 
 " ======= Theme ========
 set background=dark
 set termguicolors
-let g:onedark_termcolors=256
-colorscheme onedark 
+"let g:onedark_termcolors=256
+colorscheme badwolf 
 
 " ======= Vim Javascript ========
 let g:javascript_plugin_jsdoc = 1
@@ -151,25 +149,63 @@ function! NERDCommenter_after()
 endfunction
 
 " ======= Import Cost =======
-augroup import_cost_auto_run
-  autocmd!
-  autocmd InsertLeave *.js,*.jsx,*.ts,*.tsx ImportCost
-  autocmd BufEnter *.js,*.jsx,*.ts,*.tsx ImportCost
-  autocmd CursorHold *.js,*.jsx,*.ts,*.tsx ImportCost
-augroup END
+"augroup import_cost_auto_run
+  "autocmd!
+  "autocmd InsertLeave *.js,*.jsx,*.ts,*.tsx ImportCost
+  "autocmd BufEnter *.js,*.jsx,*.ts,*.tsx ImportCost
+  "autocmd CursorHold *.js,*.jsx,*.ts,*.tsx ImportCost
+"augroup END
 
 " ======= Vim Airline =======
 let g:airline#extensions#tabline#enabled = 1
 
 " ======= Shortcuts =======
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" Remap for rename current word
+nmap <leader>lr <Plug>(coc-rename)
 
 " Remap move between windows
 nnoremap <C-J> <C-W>j
@@ -186,6 +222,9 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Run the Code Lens action on the current line.
+nmap <leader>cl  <Plug>(coc-codelens-action)
 
 " Show documentation
 nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
