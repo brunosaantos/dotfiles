@@ -7,6 +7,7 @@ ZSH_THEME="robbyrussell"
 # Plugins
 plugins=(
   git
+  kubectl
 )
 
 # Start tmux by default
@@ -47,8 +48,22 @@ prompt spaceship
 # Load secrets
 source $HOME/.zshrc.secrets
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+# PNPM
+export PNPM_HOME="/Users/$USER/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
 
 # Add homebrew path when apple silicon
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "/Users/$USER/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "/Users/$USER/Downloads/google-cloud-sdk/path.zsh.inc"; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f "/Users/$USER/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "/Users/$USER/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/$USER/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
